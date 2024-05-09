@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 
 st.set_page_config(
-   page_title="You\'re Snow Amazing! Badge Mgmt",
+   page_title="あなたは素晴らしい雪です！バッジ管理",
    page_icon= "🏆"
 )
 
@@ -64,26 +64,26 @@ def get_user_profile_info():
          st.session_state['display_name'] = user_results_pd_df['DISPLAY_NAME'].iloc[0]
          st.session_state['display_name_flag'] = 'True'
       else:
-         st.session_state['display_name'] = "Please go to the :star: page to generate a DISPLAY NAME for your badge(s)."
+         st.session_state['display_name'] = ":star: ページに移動して、バッジの表示名を生成してください。"
          st.session_state['display_name_flag'] = "False"
 
       #if user_results_pd_df['display_format'] is not None:
       st.session_state['display_format'] = str(user_results_pd_df['DISPLAY_FORMAT'].iloc[0])
    
    else: # no rows returned
-        st.markdown(":red[There is no record of the UNI_ID/UUID combination you entered. Make sure you didn't include any stray spaces or returns in the entry boxes. Also try refreshing the browser if the tab has been open for more than 15 minutes.]") 
+        st.markdown(":red[入力した UNI_ID/UUID の組み合わせの記録はありません。入力ボックスに余分なスペースや改行が含まれていないことを確認してください。また、タブが 15 分以上開いている場合は、ブラウザを更新してみてください。]") 
 
 with st.sidebar:
    st.sidebar.header("User")
-   uni_id = st.text_input('Enter your learn.snowflake.com UNI ID:')
-   uni_uuid = st.text_input('Enter the secret UUID displayed on the DORA is Listening Page of any Workshop:')
-   find_my_uni_record = st.button("Find my UNI User Info")
+   uni_id = st.text_input('learn.snowflake.com UNI ID を入力してください')
+   uni_uuid = st.text_input('ワークショップの DORA リスニング ページに表示されるシークレット UUID を入力します。')
+   find_my_uni_record = st.button("UNI ユーザー情報を探す")
    # st.session_state
 
 # Page Header
-st.header('You\'re Snow Amazing!')
-st.write('Welcome to the learn.snowflake.com Workshop Badge Management app!')
-st.write('Using this app you can manage your badge name and email and you can view your results.')
+st.header('あなたは素晴らしい雪です')
+st.write('learn.snowflake.com ワークショップ バッジ管理アプリへようこそ!')
+st.write('このアプリを使用すると、バッジの名前と電子メールを管理し、結果を表示できます。')
 
 
 if find_my_uni_record:
@@ -103,16 +103,16 @@ if find_my_uni_record:
 if st.session_state.auth_status == 'authed':
    # st.write(st.session_state.display_format)
    st.subheader("We Found You!")
-   st.markdown("**GIVEN NAME:** " + st.session_state.given_name)
-   st.markdown("**MIDDLE/ALTERNATE NAME:** "+ st.session_state.middle_name) 
-   st.markdown("**FAMILY NAME:** " + st.session_state.family_name)
-   st.markdown("**EMAIL:** " + st.session_state.badge_email)
+   st.markdown("**名:** " + st.session_state.given_name)
+   st.markdown("**ミドルネーム/別名:** "+ st.session_state.middle_name) 
+   st.markdown("**苗字:** " + st.session_state.family_name)
+   st.markdown("**Eメール:** " + st.session_state.badge_email)
    if st.session_state.display_name_flag != "False":
-      st.markdown("**Name Will Display on Badge as:** :green[" + st.session_state.display_name + "]")
+      st.markdown("**名前はバッジに次のように表示されます。:** :green[" + st.session_state.display_name + "]")
    else:
-      md_str =  "**Name Will Display on Badge As:** :red[" + st.session_state.display_name + "]"       
+      md_str =  "**名前はバッジに次のように表示されます。:** :red[" + st.session_state.display_name + "]"       
       st.markdown(md_str)
       st.write("-----")
-      st.markdown("*If your display name has not been generated, or you would like to make changes to your name, email, or display name, go to the :pencil2: and :star: pages.*")
+      st.markdown("*表示名が生成されていない場合、または名前、メールアドレス、表示名を変更したい場合は、✏️ ページに移動して編集してください。*")
 else:
-   st.markdown(":red[Please sign in using your UNI_ID and UUID in the sidebar.]")
+   st.markdown(":red[サイドバーで UNI_ID と UUID を使用してサインインしてください。]")
